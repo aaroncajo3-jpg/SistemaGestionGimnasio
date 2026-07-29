@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Controlador/Controlador.csproj" Id="6ec39d36-06f1-4a87-8ba4-30aff6b9ce5f" />
+  <Project Path="Datos/Datos.csproj" Id="55a845d7-74a1-4879-a4b7-3c0ec4dee0fb" />
+  <Project Path="Entidades/Entidades.csproj" Id="3c76695c-f587-43d9-8b3d-2b057ef7aabf" />
+  <Project Path="VisualGestionGimnasio/VisualGestionGimnasio.csproj" Id="b9daf76f-ea84-4951-9f10-c10489d5f8a6" />
+</Solution>

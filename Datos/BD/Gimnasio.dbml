@@ -1,0 +1,538 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="GestionGimnasio" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=BRANDON_19;Initial Catalog=GestionGimnasio;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="Datos.Properties.Settings" SettingsPropertyName="GestionGimnasioConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Usuario" Member="Usuario">
+    <Type Name="Usuario">
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Contrasena" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Rol" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Usuario_Pago" Member="Pago" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Pago" />
+      <Association Name="Usuario_Cliente" Member="Cliente" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Cliente" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rutina" Member="Rutina">
+    <Type Name="Rutina">
+      <Column Name="IdRutina" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Objetivo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Nivel" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(120) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Rutina_DetalleRutina" Member="DetalleRutina" ThisKey="IdRutina" OtherKey="IdRutina" Type="DetalleRutina" />
+      <Association Name="Rutina_AsignacionRutina" Member="AsignacionRutina" ThisKey="IdRutina" OtherKey="IdRutina" Type="AsignacionRutina" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pago" Member="Pago">
+    <Type Name="Pago">
+      <Column Name="IdPago" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdInscripcion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FechaPago" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Monto" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="MetodoPago" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Usuario_Pago" Member="Usuario" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
+      <Association Name="Inscripcion_Pago" Member="Inscripcion" ThisKey="IdInscripcion" OtherKey="IdInscripcion" Type="Inscripcion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Membresia" Member="Membresia">
+    <Type Name="Membresia">
+      <Column Name="IdMembresia" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="DuracionDias" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Precio" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Membresia_Inscripcion" Member="Inscripcion" ThisKey="IdMembresia" OtherKey="IdMembresia" Type="Inscripcion" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Maquina" Member="Maquina">
+    <Type Name="Maquina">
+      <Column Name="IdMaquina" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Marca" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Ubicacion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Maquina_Ejercicio" Member="Ejercicio" ThisKey="IdMaquina" OtherKey="IdMaquina" Type="Ejercicio" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Inscripcion" Member="Inscripcion">
+    <Type Name="Inscripcion">
+      <Column Name="IdInscripcion" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FechaInicio" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FechaFin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="IdCliente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdMembresia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Inscripcion_Pago" Member="Pago" ThisKey="IdInscripcion" OtherKey="IdInscripcion" Type="Pago" />
+      <Association Name="Membresia_Inscripcion" Member="Membresia" ThisKey="IdMembresia" OtherKey="IdMembresia" Type="Membresia" IsForeignKey="true" />
+      <Association Name="Cliente_Inscripcion" Member="Cliente" ThisKey="IdCliente" OtherKey="IdCliente" Type="Cliente" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Entrenador" Member="Entrenador">
+    <Type Name="Entrenador">
+      <Column Name="IdEntrenador" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Cedula" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombres" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Apellidos" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Especialidad" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FechaIngreso" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Entrenador_AsignacionRutina" Member="AsignacionRutina" ThisKey="IdEntrenador" OtherKey="IdEntrenador" Type="AsignacionRutina" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Ejercicio" Member="Ejercicio">
+    <Type Name="Ejercicio">
+      <Column Name="IdEjercicio" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="GrupoMuscular" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IdMaquina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Ejercicio_DetalleRutina" Member="DetalleRutina" ThisKey="IdEjercicio" OtherKey="IdEjercicio" Type="DetalleRutina" />
+      <Association Name="Maquina_Ejercicio" Member="Maquina" ThisKey="IdMaquina" OtherKey="IdMaquina" Type="Maquina" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DetalleRutina" Member="DetalleRutina">
+    <Type Name="DetalleRutina">
+      <Column Name="IdDetalleRutina" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdRutina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdEjercicio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Series" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Repeticiones" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DescansoSeg" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Ejercicio_DetalleRutina" Member="Ejercicio" ThisKey="IdEjercicio" OtherKey="IdEjercicio" Type="Ejercicio" IsForeignKey="true" />
+      <Association Name="Rutina_DetalleRutina" Member="Rutina" ThisKey="IdRutina" OtherKey="IdRutina" Type="Rutina" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cliente" Member="Cliente">
+    <Type Name="Cliente">
+      <Column Name="IdCliente" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cedula" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombres" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Apellidos" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Sexo" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="FechaNacimiento" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Direccion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="FechaRegistro" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Cliente_Inscripcion" Member="Inscripcion" ThisKey="IdCliente" OtherKey="IdCliente" Type="Inscripcion" />
+      <Association Name="Cliente_AsignacionRutina" Member="AsignacionRutina" ThisKey="IdCliente" OtherKey="IdCliente" Type="AsignacionRutina" />
+      <Association Name="Usuario_Cliente" Member="Usuario" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AsignacionRutina" Member="AsignacionRutina">
+    <Type Name="AsignacionRutina">
+      <Column Name="IdAsignacionRutina" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdRutina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdEntrenador" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdCliente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FechaAsignacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Observaciones" Type="System.String" DbType="VarChar(120) NOT NULL" CanBeNull="false" />
+      <Column Name="FechaFIn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Cliente_AsignacionRutina" Member="Cliente" ThisKey="IdCliente" OtherKey="IdCliente" Type="Cliente" IsForeignKey="true" />
+      <Association Name="Entrenador_AsignacionRutina" Member="Entrenador" ThisKey="IdEntrenador" OtherKey="IdEntrenador" Type="Entrenador" IsForeignKey="true" />
+      <Association Name="Rutina_AsignacionRutina" Member="Rutina" ThisKey="IdRutina" OtherKey="IdRutina" Type="Rutina" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.CP_ListarAsignacionRutinaFiltro" Method="CP_ListarAsignacionRutinaFiltro">
+    <Parameter Name="Valor" Parameter="valor" Type="System.String" DbType="VarChar(40)" />
+    <ElementType Name="CP_ListarAsignacionRutinaFiltroResult">
+      <Column Name="IdAsignacionRutina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdRutina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdEntrenador" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdCliente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FechaAsignacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Observaciones" Type="System.String" DbType="VarChar(120) NOT NULL" CanBeNull="false" />
+      <Column Name="FechaFin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CP_EliminarAsignacionRutina" Method="CP_EliminarAsignacionRutina">
+    <Parameter Name="IdAsignacionRutina" Parameter="idAsignacionRutina" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_EliminarCliente" Method="CP_EliminarCliente">
+    <Parameter Name="IdCliente" Parameter="idCliente" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_EliminarDetalleRutina" Method="CP_EliminarDetalleRutina">
+    <Parameter Name="IdDetalleRutina" Parameter="idDetalleRutina" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_EliminarEjercicio" Method="CP_EliminarEjercicio">
+    <Parameter Name="IdEjercicio" Parameter="idEjercicio" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_EliminarEntrenador" Method="CP_EliminarEntrenador">
+    <Parameter Name="IdEntrenador" Parameter="idEntrenador" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_EliminarInscripcion" Method="CP_EliminarInscripcion">
+    <Parameter Name="IdInscripcion" Parameter="idInscripcion" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_EliminarMaquina" Method="CP_EliminarMaquina">
+    <Parameter Name="IdMaquina" Parameter="idMaquina" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_EliminarMembresia" Method="CP_EliminarMembresia">
+    <Parameter Name="IdMembresia" Parameter="idMembresia" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_EliminarPago" Method="CP_EliminarPago">
+    <Parameter Name="IdPago" Parameter="idPago" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_EliminarRutina" Method="CP_EliminarRutina">
+    <Parameter Name="IdRutina" Parameter="idRutina" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_EliminarUsuario" Method="CP_EliminarUsuario">
+    <Parameter Name="IdUsuario" Parameter="idUsuario" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_InsertarAsignacionRutina" Method="CP_InsertarAsignacionRutina">
+    <Parameter Name="IdAsignacionRutina" Parameter="idAsignacionRutina" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdRutina" Parameter="idRutina" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdEntrenador" Parameter="idEntrenador" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdCliente" Parameter="idCliente" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FechaAsignacion" Parameter="fechaAsignacion" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Observaciones" Parameter="observaciones" Type="System.String" DbType="VarChar(120)" />
+    <Parameter Name="FechaFin" Parameter="fechaFin" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_InsertarCliente" Method="CP_InsertarCliente">
+    <Parameter Name="IdCliente" Parameter="idCliente" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdUsuario" Parameter="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Nombres" Parameter="nombres" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Apellidos" Parameter="apellidos" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Sexo" Parameter="sexo" Type="System.Char" DbType="Char(1)" />
+    <Parameter Name="FechaNacimiento" Parameter="fechaNacimiento" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Direccion" Parameter="direccion" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Telefono" Parameter="telefono" Type="System.String" DbType="VarChar(15)" />
+    <Parameter Name="Correo" Parameter="correo" Type="System.String" DbType="VarChar(15)" />
+    <Parameter Name="FechaRegistro" Parameter="fechaRegistro" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_InsertarDetalleRutina" Method="CP_InsertarDetalleRutina">
+    <Parameter Name="IdDetalleRutina" Parameter="idDetalleRutina" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdRutina" Parameter="idRutina" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdEjercicio" Parameter="idEjercicio" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Series" Parameter="series" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Repeticiones" Parameter="repeticiones" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DescansoSeg" Parameter="descansoSeg" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_InsertarEjercicio" Method="CP_InsertarEjercicio">
+    <Parameter Name="IdEjercicio" Parameter="idEjercicio" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="GrupoMuscular" Parameter="grupoMuscular" Type="System.String" DbType="VarChar(40)" />
+    <Parameter Name="Descripcion" Parameter="descripcion" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="IdMaquina" Parameter="idMaquina" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_InsertarEntrenador" Method="CP_InsertarEntrenador">
+    <Parameter Name="IdEntrenador" Parameter="idEntrenador" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Nombres" Parameter="nombres" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Apellidos" Parameter="apellidos" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Especialidad" Parameter="especialidad" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Telefono" Parameter="telefono" Type="System.String" DbType="VarChar(15)" />
+    <Parameter Name="Correo" Parameter="correo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="FechaIngreso" Parameter="fechaIngreso" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_InsertarInscripcion" Method="CP_InsertarInscripcion">
+    <Parameter Name="IdInscripcion" Parameter="idInscripcion" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FechaInicio" Parameter="fechaInicio" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="FechaFin" Parameter="fechaFin" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="IdCliente" Parameter="idCliente" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdMembresia" Parameter="idMembresia" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_InsertarMaquina" Method="CP_InsertarMaquina">
+    <Parameter Name="IdMaquina" Parameter="idMaquina" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Marca" Parameter="marca" Type="System.String" DbType="VarChar(40)" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Ubicacion" Parameter="ubicacion" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_InsertarMembresia" Method="CP_InsertarMembresia">
+    <Parameter Name="IdMembresia" Parameter="idMembresia" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="DuracionDias" Parameter="duracionDias" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Precio" Parameter="precio" Type="System.Decimal" DbType="Decimal(10,2)" />
+    <Parameter Name="Descripcion" Parameter="descripcion" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_InsertarPago" Method="CP_InsertarPago">
+    <Parameter Name="IdPago" Parameter="idPago" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdUsuario" Parameter="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdInscripcion" Parameter="idInscripcion" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FechaPago" Parameter="fechaPago" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Monto" Parameter="monto" Type="System.Decimal" DbType="Decimal(10,2)" />
+    <Parameter Name="MetodoPago" Parameter="metodoPago" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_InsertarRutina" Method="CP_InsertarRutina">
+    <Parameter Name="IdRutina" Parameter="idRutina" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Objetivo" Parameter="objetivo" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Nivel" Parameter="nivel" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Descripcion" Parameter="descripcion" Type="System.String" DbType="VarChar(120)" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_InsertarUsuario" Method="CP_InsertarUsuario">
+    <Parameter Name="IdUsuario" Parameter="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="NombreUsuario" Parameter="nombreUsuario" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Contrasena" Parameter="contrasena" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Rol" Parameter="rol" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_ListarClienteFiltro" Method="CP_ListarClienteFiltro">
+    <Parameter Name="Valor" Parameter="valor" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="CP_ListarClienteFiltroResult">
+      <Column Name="IdCliente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cedula" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombres" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Apellidos" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Sexo" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="FechaNacimiento" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Direccion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="FechaRegistro" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CP_ListarDetalleRutinaFiltro" Method="CP_ListarDetalleRutinaFiltro">
+    <Parameter Name="Valor" Parameter="valor" Type="System.String" DbType="VarChar(40)" />
+    <ElementType Name="CP_ListarDetalleRutinaFiltroResult">
+      <Column Name="IdDetalleRutina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdRutina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdEjercicio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Series" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Repeticiones" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DescansoSeg" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CP_ListarEjercicioFiltro" Method="CP_ListarEjercicioFiltro">
+    <Parameter Name="Valor" Parameter="valor" Type="System.String" DbType="VarChar(40)" />
+    <ElementType Name="CP_ListarEjercicioFiltroResult">
+      <Column Name="IdEjercicio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="GrupoMuscular" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IdMaquina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CP_ListarEntrenadorFiltro" Method="CP_ListarEntrenadorFiltro">
+    <Parameter Name="Valor" Parameter="valor" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="CP_ListarEntrenadorFiltroResult">
+      <Column Name="IdEntrenador" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cedula" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombres" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Apellidos" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Especialidad" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FechaIngreso" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CP_ListarInscripcionFiltro" Method="CP_ListarInscripcionFiltro">
+    <Parameter Name="Valor" Parameter="valor" Type="System.String" DbType="VarChar(40)" />
+    <ElementType Name="CP_ListarInscripcionFiltroResult">
+      <Column Name="IdInscripcion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FechaInicio" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FechaFin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="IdCliente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdMembresia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CP_ListarMaquinaFiltro" Method="CP_ListarMaquinaFiltro">
+    <Parameter Name="Valor" Parameter="valor" Type="System.String" DbType="VarChar(40)" />
+    <ElementType Name="CP_ListarMaquinaFiltroResult">
+      <Column Name="IdMaquina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Marca" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Ubicacion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CP_ListarMembresiaFiltro" Method="CP_ListarMembresiaFiltro">
+    <Parameter Name="Valor" Parameter="valor" Type="System.String" DbType="VarChar(40)" />
+    <ElementType Name="CP_ListarMembresiaFiltroResult">
+      <Column Name="IdMembresia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="DuracionDias" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Precio" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CP_ListarPagoFiltro" Method="CP_ListarPagoFiltro">
+    <Parameter Name="Valor" Parameter="valor" Type="System.String" DbType="VarChar(40)" />
+    <ElementType Name="CP_ListarPagoFiltroResult">
+      <Column Name="IdPago" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdInscripcion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FechaPago" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Monto" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="MetodoPago" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CP_ListarRutinaFiltro" Method="CP_ListarRutinaFiltro">
+    <Parameter Name="Valor" Parameter="valor" Type="System.String" DbType="VarChar(40)" />
+    <ElementType Name="CP_ListarRutinaFiltroResult">
+      <Column Name="IdRutina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Objetivo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Nivel" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(120) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CP_ListarUsuarioFiltro" Method="CP_ListarUsuarioFiltro">
+    <Parameter Name="Valor" Parameter="valor" Type="System.String" DbType="VarChar(40)" />
+    <ElementType Name="CP_ListarUsuarioFiltroResult">
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Contrasena" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Rol" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CP_ModificarAsignacionRutina" Method="CP_ModificarAsignacionRutina">
+    <Parameter Name="IdAsignacionRutina" Parameter="idAsignacionRutina" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdRutina" Parameter="idRutina" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdEntrenador" Parameter="idEntrenador" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdCliente" Parameter="idCliente" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FechaAsignacion" Parameter="fechaAsignacion" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Observaciones" Parameter="observaciones" Type="System.String" DbType="VarChar(120)" />
+    <Parameter Name="FechaFin" Parameter="fechaFin" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_ModificarCliente" Method="CP_ModificarCliente">
+    <Parameter Name="IdCliente" Parameter="idCliente" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdUsuario" Parameter="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Nombres" Parameter="nombres" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Apellidos" Parameter="apellidos" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Sexo" Parameter="sexo" Type="System.Char" DbType="Char(1)" />
+    <Parameter Name="FechaNacimiento" Parameter="fechaNacimiento" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Direccion" Parameter="direccion" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Telefono" Parameter="telefono" Type="System.String" DbType="VarChar(15)" />
+    <Parameter Name="Correo" Parameter="correo" Type="System.String" DbType="VarChar(15)" />
+    <Parameter Name="FechaRegistro" Parameter="fechaRegistro" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_ModificarDetalleRutina" Method="CP_ModificarDetalleRutina">
+    <Parameter Name="IdDetalleRutina" Parameter="idDetalleRutina" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdRutina" Parameter="idRutina" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdEjercicio" Parameter="idEjercicio" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Series" Parameter="series" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Repeticiones" Parameter="repeticiones" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DescansoSeg" Parameter="descansoSeg" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_ModificarEjercicio" Method="CP_ModificarEjercicio">
+    <Parameter Name="IdEjercicio" Parameter="idEjercicio" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="GrupoMuscular" Parameter="grupoMuscular" Type="System.String" DbType="VarChar(40)" />
+    <Parameter Name="Descripcion" Parameter="descripcion" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="IdMaquina" Parameter="idMaquina" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_ModificarEntrenador" Method="CP_ModificarEntrenador">
+    <Parameter Name="IdEntrenador" Parameter="idEntrenador" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Nombres" Parameter="nombres" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Apellidos" Parameter="apellidos" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Especialidad" Parameter="especialidad" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Telefono" Parameter="telefono" Type="System.String" DbType="VarChar(15)" />
+    <Parameter Name="Correo" Parameter="correo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="FechaIngreso" Parameter="fechaIngreso" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_ModificarInscripcion" Method="CP_ModificarInscripcion">
+    <Parameter Name="IdInscripcion" Parameter="idInscripcion" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FechaInicio" Parameter="fechaInicio" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="FechaFin" Parameter="fechaFin" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="IdCliente" Parameter="idCliente" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdMembresia" Parameter="idMembresia" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_ModificarMaquina" Method="CP_ModificarMaquina">
+    <Parameter Name="IdMaquina" Parameter="idMaquina" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Marca" Parameter="marca" Type="System.String" DbType="VarChar(40)" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Ubicacion" Parameter="ubicacion" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_ModificarMembresia" Method="CP_ModificarMembresia">
+    <Parameter Name="IdMembresia" Parameter="idMembresia" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="DuracionDias" Parameter="duracionDias" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Precio" Parameter="precio" Type="System.Decimal" DbType="Decimal(10,2)" />
+    <Parameter Name="Descripcion" Parameter="descripcion" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_ModificarPago" Method="CP_ModificarPago">
+    <Parameter Name="IdPago" Parameter="idPago" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdUsuario" Parameter="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdInscripcion" Parameter="idInscripcion" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FechaPago" Parameter="fechaPago" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Monto" Parameter="monto" Type="System.Decimal" DbType="Decimal(10,2)" />
+    <Parameter Name="MetodoPago" Parameter="metodoPago" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_ModificarRutina" Method="CP_ModificarRutina">
+    <Parameter Name="IdRutina" Parameter="idRutina" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Objetivo" Parameter="objetivo" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Nivel" Parameter="nivel" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Descripcion" Parameter="descripcion" Type="System.String" DbType="VarChar(120)" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CP_ModificarUsuario" Method="CP_ModificarUsuario">
+    <Parameter Name="IdUsuario" Parameter="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="NombreUsuario" Parameter="nombreUsuario" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Contrasena" Parameter="contrasena" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Rol" Parameter="rol" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Estado" Parameter="estado" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
