@@ -17,6 +17,16 @@ namespace VisualGestionGimnasio.Seguridad
             InitializeComponent();
         }
 
-       
+        private void mEMBRESIAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms["FrmAdminMembresia"] == null)
+            {
+                FrmAdminMemb frmK = new FrmAdminMemb
+                {
+                    MdiParent = this
+                };
+                frmK.Show();
+            }
+        }
     }
 }

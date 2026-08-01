@@ -31,11 +31,11 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.sEGURIDADToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iNVENTARIOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mEMBRESIAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fACTURACIONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rEPORTESToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aYUDAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.mEMBRESIAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +58,7 @@
             // sEGURIDADToolStripMenuItem
             // 
             this.sEGURIDADToolStripMenuItem.Name = "sEGURIDADToolStripMenuItem";
-            this.sEGURIDADToolStripMenuItem.Size = new System.Drawing.Size(125, 30);
+            this.sEGURIDADToolStripMenuItem.Size = new System.Drawing.Size(125, 29);
             this.sEGURIDADToolStripMenuItem.Text = "SEGURIDAD";
             // 
             // iNVENTARIOToolStripMenuItem
@@ -66,25 +66,32 @@
             this.iNVENTARIOToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mEMBRESIAToolStripMenuItem});
             this.iNVENTARIOToolStripMenuItem.Name = "iNVENTARIOToolStripMenuItem";
-            this.iNVENTARIOToolStripMenuItem.Size = new System.Drawing.Size(129, 30);
+            this.iNVENTARIOToolStripMenuItem.Size = new System.Drawing.Size(129, 29);
             this.iNVENTARIOToolStripMenuItem.Text = "INVENTARIO";
+            // 
+            // mEMBRESIAToolStripMenuItem
+            // 
+            this.mEMBRESIAToolStripMenuItem.Name = "mEMBRESIAToolStripMenuItem";
+            this.mEMBRESIAToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.mEMBRESIAToolStripMenuItem.Text = "MEMBRESIA";
+            this.mEMBRESIAToolStripMenuItem.Click += new System.EventHandler(this.mEMBRESIAToolStripMenuItem_Click);
             // 
             // fACTURACIONToolStripMenuItem
             // 
             this.fACTURACIONToolStripMenuItem.Name = "fACTURACIONToolStripMenuItem";
-            this.fACTURACIONToolStripMenuItem.Size = new System.Drawing.Size(146, 30);
+            this.fACTURACIONToolStripMenuItem.Size = new System.Drawing.Size(146, 29);
             this.fACTURACIONToolStripMenuItem.Text = "FACTURACIÓN";
             // 
             // rEPORTESToolStripMenuItem
             // 
             this.rEPORTESToolStripMenuItem.Name = "rEPORTESToolStripMenuItem";
-            this.rEPORTESToolStripMenuItem.Size = new System.Drawing.Size(110, 30);
+            this.rEPORTESToolStripMenuItem.Size = new System.Drawing.Size(110, 29);
             this.rEPORTESToolStripMenuItem.Text = "REPORTES";
             // 
             // aYUDAToolStripMenuItem
             // 
             this.aYUDAToolStripMenuItem.Name = "aYUDAToolStripMenuItem";
-            this.aYUDAToolStripMenuItem.Size = new System.Drawing.Size(86, 30);
+            this.aYUDAToolStripMenuItem.Size = new System.Drawing.Size(86, 29);
             this.aYUDAToolStripMenuItem.Text = "AYUDA";
             // 
             // statusStrip1
@@ -96,12 +103,6 @@
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // mEMBRESIAToolStripMenuItem
-            // 
-            this.mEMBRESIAToolStripMenuItem.Name = "mEMBRESIAToolStripMenuItem";
-            this.mEMBRESIAToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.mEMBRESIAToolStripMenuItem.Text = "MEMBRESIA";
-            // 
             // FrmMenuMDI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -110,6 +111,7 @@
             this.ClientSize = new System.Drawing.Size(1370, 730);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmMenuMDI";
             this.Text = "FrmMenuMDI";

@@ -55,13 +55,19 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Seguridad\FrmAdminMembresia.cs">
+    <Compile Include="Inventario\FrmEditMembresia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Seguridad\FrmAdminMembresia.Designer.cs">
-      <DependentUpon>FrmAdminMembresia.cs</DependentUpon>
+    <Compile Include="Inventario\FrmEditMembresia.Designer.cs">
+      <DependentUpon>FrmEditMembresia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Inventario\FrmAdminMemb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventario\FrmAdminMemb.Designer.cs">
+      <DependentUpon>FrmAdminMemb.cs</DependentUpon>
     </Compile>
     <Compile Include="Seguridad\FrmMenuMDI.cs">
       <SubType>Form</SubType>
@@ -69,6 +75,9 @@
     <Compile Include="Seguridad\FrmMenuMDI.Designer.cs">
       <DependentUpon>FrmMenuMDI.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Inventario\FrmEditMembresia.resx">
+      <DependentUpon>FrmEditMembresia.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -79,8 +88,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Seguridad\FrmAdminMembresia.resx">
-      <DependentUpon>FrmAdminMembresia.cs</DependentUpon>
+    <EmbeddedResource Include="Inventario\FrmAdminMemb.resx">
+      <DependentUpon>FrmAdminMemb.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Seguridad\FrmMenuMDI.resx">
       <DependentUpon>FrmMenuMDI.cs</DependentUpon>
@@ -101,7 +110,16 @@
   <ItemGroup>
     <Folder Include="Facturacion\" />
     <Folder Include="Imagenes\" />
-    <Folder Include="Inventario\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Controlador\Controlador.csproj">
+      <Project>{6ec39d36-06f1-4a87-8ba4-30aff6b9ce5f}</Project>
+      <Name>Controlador</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{3c76695c-f587-43d9-8b3d-2b057ef7aabf}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
